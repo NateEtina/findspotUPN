@@ -1,0 +1,307 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url('../font/Raleway-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Aptos';
+    src: url('../font/aptos-light.ttf') format("truetype");
+}
+
+html{
+    overflow-x: hidden;
+    width: 100%;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: 'Aptos','Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul li{
+    list-style: none;
+}
+
+/* Login and Sign up */
+
+.auth_container *{
+    font-family: 'Raleway', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.auth_container{
+    display: flex;
+    height: 100vh;
+}
+
+.auth_aside, #auth_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;    
+    width: 50%;
+    padding: 10px;
+}
+.auth_aside{
+    background: linear-gradient(rgba(55, 67, 75, 0.4), rgba(55, 67, 75, 0.4)), url('../images/wallpapers/horizon.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.auth_aside span{
+    font-size: 30px;
+}
+
+.auth_aside small{
+}
+
+#auth_div span{
+}
+
+#auth_div #app_title{
+    font-size: 16px;
+}
+#auth_div #auth_subtitle{
+    font-size: 16px;
+}
+
+#auth_div span{
+    display: block;
+}
+
+#auth_div form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input{
+    padding: 12px;
+}
+#connexion_btn{
+    background-color: #001524;
+    color: white;
+    border: 0px;
+    padding: 15px;
+    width: 300px;
+}
+
+.auth_bottom{
+    display: flex;
+    gap: 5px;
+}
+.auth_bottom p, .auth_bottom a{
+    font-size: 17px;
+}
+
+.auth_bottom a{
+    color: #CE5959;
+}
+
+#auth_div #app_title{
+    color: #CE5959;
+    font-size: 30px;
+    font-weight: bold;
+}
+/**/
+
+/* header's style */
+
+header{
+    position: absolute;
+    width: 100%;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.4);
+    padding: 15px 100px;
+}
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+nav .main_title{
+    font-size: 22px;  
+    font-weight: bold;
+}
+
+nav .buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+nav .buttons a{
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(72, 101, 121);
+}
+
+nav .buttons .user_activate{
+    color: rgb(202, 102, 102);
+}
+/* --------------end ----------------*/
+
+/* section */
+
+section{
+    display: flex;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+}
+
+section .mainview{
+    background-color: rgb(72, 101, 121);/*rgba(0, 0, 0, 0.7);*/
+    margin-bottom: 8px;
+    padding: 5px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+}
+
+.mainview div a{
+    display: block;
+    color: white;
+    padding: 10px 15px;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: justify;
+}
+.mainview div a:hover{
+    background-color: white;
+    color: rgb(72, 101, 121);
+}
+
+.mainview, #mapview{
+    height: 85vh;
+}
+
+section .controlview {
+    position: relative;
+    width: 100%;
+}
+
+#lil_menu, #lil_menu2, #mapview {
+    position: absolute;
+    width: 100%;
+}
+
+#lil_menu, #lil_menu2{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 20px;
+    z-index: 10000;
+}
+
+#lil_menu{
+    
+}
+
+#lil_menu #location_btn{
+    padding: 2px 10px;
+}
+
+#lil_menu #search_place{
+    padding: 5px;
+    color: blue;
+}
+#lil_menu2{    
+    top: 90%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#lil_menu2 label{   
+    font-size: 16px;
+}
+
+.controlview #mapview{
+}
+/*
+section .controlview .lil_menu{
+    display: flex;
+    border: 1px solid;
+  
+}
+section .controlview #mapview{
+    border: 1px solid ;
+    position: absolute;
+    top: 30%; bottom: 0; 
+    width: 100%;
+}*/
+
+footer{
+    position: absolute;
+    bottom: 1%;
+}
+/* ----------- Map style view ------------- */
+
+#markerpanel{
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 100;
+    width: 200px;
+}
+
+#markerpanel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#markerpanel ul li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+#markerpanel ul li:hover {
+    background-color: #ddd;
+}
+
+.marker1, .marker2, .marker3, .marker4{
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+.marker1{
+    background-image: url(../images/icons/college-3.svg);
+}
+
+.marker2{
+    background-image: url(../images/icons/college-4.svg);
+}
+
+.marker3{
+    background-image: url(../images/icons/college-3.svg);
+}
+
+.marker4{
+    background-image: url(../images/icons/commercial.svg);
+}
+
+.subtitle{
+    width: 100px;
+    text-align: center;
+    transform: translate(-40px, 20px);
+    text-transform: capitalize;
+    font-family:'Aptos';
+    font-size: 12px;
+    line-height: 1.2; 
+}

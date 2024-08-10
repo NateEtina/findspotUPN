@@ -1,0 +1,64 @@
+
+Recherches
+---------
+- Fonction du FilePathField django
+- télécharger des icons SVG ou png des :
+	- bureaux
+	- batiments
+	- terrain de foot/basket
+	- espace commercial 
+
+Mapbox : 
+- Center the map on a clicked feature
+- Get coordinates of the mouse pointer
+- Measure distances
+- Restrict map panning to an area
+
+| Fonctionnalités :
+
+- Ajouter les adresses restantes dans la base de données
+- Ajouter une boite de dialogue a clic-droit sur le marker
+- Centrer la carte sur une adresse apres une recherche
+- Consultation de la description d'un lieu
+- Modifier l'apparence du site (menu...)
+- Mesurer la distance en metres entre deux lieux
+- Ajout des points d'interet/nouvelle adresse
+- Recuperation des coordonnées d'un espace en degrés, minutes et secondes
+- Visite de l'historique de navigation(optionnel)
+- Affichage d'un panel ou popup de détails sur les lieux
+
+- Recherche d'un lieu | done
+- Création/connexion/déconnexion de compte utilisateur | done
+- géolocalisation de l'utilisateur | done
+- Affichage unique des batiments, locaux, offices, espaces et points d'interet | done
+- Changer de style de la carte | done
+- Limiter l'affichage de la carte que sur l'UPN | done
+
+| Base de données
+
+- 
+
+| Vue du Map : 
+	
+ 1. Home view :
+	- les batiments en icones noir
+	- les locaux en cluster rouge avec un nombre indicant leur nombre
+	- les offices icones en bleu
+	- les espaces en icones vert
+	- les points d'interet en marker rouge
+
+ 5. Point		  
+
+Helpful websites : 
+geojson.io : to find geocoordinates
+google maps : for more informations
+
+| Q/A de défense
+
+Q/ Pourquoi avoir développer une application a part entiere au lieu d'utiliser 
+une solution déja existante : 
+
+A/la raison de developper une application de geolocalisation pour l'UPN est de pouvoir personnalisé 
+c'est enorme ecosystem 
+
+

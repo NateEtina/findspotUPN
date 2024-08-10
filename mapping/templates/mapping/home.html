@@ -1,0 +1,212 @@
+
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url "mapping:homepage" %}" class="main_title">Findspot UPN</a></li>
+        </ul>
+
+        {% if user.is_authenticated %}
+        <ul class="buttons">
+            <li>
+                <a href="{% url "mapping:homepage" %}" class="user_activate">
+                    {{user.username}} est connecté
+                </a>
+            </li>|
+            <li><a href="{% url "accounts:logout" %}">Déconnexion</a></li>
+        </ul>
+    
+        {% else %}
+        <ul class="buttons">
+            <li><a href="{% url "accounts:signup" %}">Inscription</a></li>|
+            <li><a href="{% url "accounts:login" %}">Connexion</a></li>
+        </ul>
+        
+        {% endif %}
+    </nav>
+</header>
+
+<section>
+    <div class="mainview">
+        <div>
+            <a href="{% url "mapping:homepage" %}" id="activate">Accueil</a>
+        </div>
+        <div>
+            <a href="{% url "mapping:tobuilding" %}">Bâtiments</a>
+        </div>
+        <div>
+            <a href="{% url "mapping:tobureau" %}">Bureaux / Directions</a>
+        </div>
+        <div>
+            <a href="{% url "mapping:tolocal" %}">Locaux</a>
+        </div>
+        <div>
+            <a href="{% url "mapping:tospace" %}">Lieux / Espaces</a>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div><a href="">Points d'intêret</a></div>
+        <div><a href="">Historique</a></div> 
+        {% endif %}
+
+    </div>
+
+    <div class="controlview">
+        {% if user.is_authenticated %}
+        <form action="" method="get">
+            <div id="lil_menu">
+                <input type="search" name="searchbar" id="search_place" placeholder="Trouver un lieu">
+                
+                <button id="location_btn">Moi</button>
+                <select name="" id="location_choice">
+                    <option value="">Choisissez une location</option>
+                    <option value="moi">Moi</option>
+                    {% for element in buildings %}
+                    <option value="{{element}}">{{ element }}</option>
+                    {% endfor %}
+                </select>
+    
+                <select name="" id="destination_choice">
+                    <option value="">Choisissez une destination</option>
+                    <option value="moi">Moi</option>
+                    {% for element in buildings %}
+                    <option value="{{element}}">{{ element }}</option>
+                    {% endfor %}
+                </select>
+    
+                <button id="navigation_btn">Navigation</button>
+            </div>
+        </form>
+
+        
+        
+        <div id="lil_menu2">
+            <input id="satellite-streets-v12" type="radio" name="rtoggle" value="satellite">
+            <!-- See a list of Mapbox-hosted public styles at -->
+            <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+            <label for="satellite-streets-v12">Satellite</label>
+            <input id="dark-v11" type="radio" name="rtoggle" value="dark">
+            <label for="dark-v11">Sombre</label>
+            <input id="streets-v12" type="radio" name="rtoggle" value="streets" checked="checked">
+            <label for="streets-v12">Rues</label>
+            <input id="outdoors-v12" type="radio" name="rtoggle" value="outdoors">
+            <label for="outdoors-v12">Exterieurs</label>
+        </div>
+        {% endif %}
+        
+        <!--div id="markerpanel">
+            <ul>
+                <li>Afficher la description</li>
+                <li>Ajouter point d'interet</li>
+            </ul>
+        </div-->
+
+        <div id="mapview"></div>
+    </div>
+</section>
+<footer>
+    Cette application est concu par Insight Invaders | Tous drois réservés
+</footer>
+
+<script>
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmF0ZS1pbnNpZ2h0IiwiYSI6ImNscHd3dm9wNjBoamIyaW51cTAwdGl0eWwifQ.PYpsdnx1xuR1ZcJyCAN35Q';
+    var map = new mapboxgl.Map({
+        container: 'mapview',
+        style: 'mapbox://styles/mapbox/streets-v12', 
+        center: [15.25784, -4.40545], // 
+        zoom: 18,
+        //minZoom: 16,
+        attributionControl: false
+    });
+
+
+    var bounds = [
+        [15.254346633583879,-4.4079479442164455], // Coordonnées du coin sud-ouest de la zone
+        [15.261302677174427,-4.400099066015827]  // Coordonnées du coin nord-est de la zone
+    ];
+    map.setMaxBounds(bounds)
+
+        
+    // Change map's style
+    const layerList = document.getElementById("lil_menu2"); // Retrieve elements from lil-menu2 div
+    const inputs = layerList.getElementsByTagName('input'); // 
+
+    for (const input of inputs) {
+        input.onclick = (layer) => {
+            const layerId = layer.target.id;
+            map.setStyle('mapbox://styles/mapbox/' + layerId);
+        };
+    }
+
+    const button = document.getElementById("yourButtonId"); // Replace with your button's ID
+    const geolocateButton = document.getElementById('location_btn');
+    geolocateButton.addEventListener('click', function(){
+            // User location
+        navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+            enableHighAccuracy: true
+        });
+
+        function successLocation(position) {
+            const { coords } = position;
+            const { latitude, longitude } = coords;
+
+            new mapboxgl.Marker()
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+
+            watchUserLocation();
+        }
+
+        function errorLocation() {
+            console.log('Unable to retrieve your location');
+        }
+
+        function watchUserLocation() {
+            navigator.geolocation.watchPosition((position) => {
+                const { coords } = position;
+                const { latitude, longitude } = coords;
+
+                map.setCenter([longitude, latitude]);
+
+                const marker = new mapboxgl.Marker()
+                    .setLngLat([longitude, latitude])
+                    .addTo(map);
+            });
+        }
+    });
+
+    {% if search_result %}
+        {% for item in search_result %}
+        new mapboxgl.Marker({color : 'red'})
+        .setLngLat([{{ item.longitude|safe }}, {{ item.latitude|safe }}])
+        .addTo(map);
+        map.setCenter([{{ item.longitude|safe }}, {{ item.latitude|safe }}])
+        
+        {% endfor %}
+    {% endif %}
+
+    {% if page == "home" %}
+        {% include "mapping/home_comp.html" %}
+
+    {% elif page == "building" %}
+        {% include "mapping/building_comp.html" %}
+
+    {% elif page == "bureau" %}
+        {% include "mapping/bureau_comp.html" %}
+
+    {% elif page == "local" %}
+        {% include "mapping/local_comp.html" %}
+
+    {% elif page == "space" %}
+        {% include "mapping/space_comp.html" %}
+        
+    {% endif %}
+
+</script>
+
+{% endblock content %}
+

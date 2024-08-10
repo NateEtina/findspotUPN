@@ -1,0 +1,20 @@
+{% load static %}
+{% for item in locals %}
+
+map.on('load', () => {
+    var iconElement = document.createElement('div');
+    iconElement.className = 'marker3';
+
+    var subtitle = document.createElement('h4');
+    subtitle.className = 'subtitle'
+    subtitle.textContent = '{{ item.name|safe }}';
+
+    iconElement.appendChild(subtitle);
+
+    new mapboxgl.Marker(iconElement)
+        .setLngLat([{{ item.longitude|safe }}, {{ item.latitude|safe }}])
+        .addTo(map);
+            
+});
+
+{% endfor %}

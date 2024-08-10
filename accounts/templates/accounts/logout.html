@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Comptez-vous vous deconnecter ?</p>
+    <a href="{{request.META.HTTP_REFERER}}">Retour</a>
+    <input type="submit" value="Confirmer"/>
+</form>
+
+{% endblock content %}

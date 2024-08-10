@@ -1,0 +1,18 @@
+
+Findspot admin : 
+username : admin
+email : admin55@gmail.com
+pwd : 3637t
+
+Mapbox account :
+
+Gmail : nathanfallsh
+username : nate-insight 
+pwd : ded11Sec$sight
+card : 4035 2511 3542 9637
+exp : 11/23
+code : 115 
+
+coding : 
+token pub :
+pk.eyJ1IjoibmF0ZS1pbnNpZ2h0IiwiYSI6ImNscGxnYWVqMzA0Y2cybXFqYzUycWVvejcifQ.hlxSJSMPtN-_L9XSGXDUZg

@@ -1,0 +1,53 @@
+
+{% extends 'main.html' %}
+{% block content %}
+
+
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+    <div class="auth_container">
+        <div class="auth_aside">
+            <span>Bienvenue sur Findspot Maps UPN</span>
+            <small>Naviguer sur le campus en toute sécurité</small>
+        </div>
+        {% if page == 'login' %}
+        <div id='auth_div'>
+            <span id="app_title">Findspot Maps</span>
+            <span id="auth_subtitle">Connectez-vous a votre compte utilisateur</span>
+            
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="text" name="username" id="" placeholder="Nom d'utilisateur">
+                <input type="password" name="password" id="" placeholder="Mot de passe">
+                <input type="submit" value="Se Connecter" id="connexion_btn"/>
+            </form>
+            <div class="auth_bottom"> 
+                <p>Vous n'avez pas de compte ?</p>
+                <a href="{% url 'accounts:signup' %}">Créer un compte</a>
+            </div>
+        </div>
+
+        {% else %}
+        <div id="auth_div">
+            <span id="app_title">Findspot Maps</span>
+            <span id="auth_subtitle">Rejoignez la plateforme de localisation fiable</span>
+            <form method="POST" action="" id="usercreation">
+                {% csrf_token %}
+                {% for field in form %}     
+                    {{field}}
+                {% endfor %}    
+                <input type="submit" value="Créer" id="connexion_btn"/>
+            </form>
+            <div class="auth_bottom"> 
+                <p>Vous avez déjà un compte ?</p>
+                <a href="{% url 'accounts:login' %}">Se connecter</a>
+            </div>
+
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock content %}
+
+
